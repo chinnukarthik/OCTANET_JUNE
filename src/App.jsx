@@ -200,6 +200,141 @@ const App = () => {
         </div>
       </section>
 
+      {/* Features Section */}
+      <section id="features" className="py-24 relative">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 scroll-reveal">
+            <h2 className="text-5xl font-bold mb-6 gradient-text">Powerful Features</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Everything you need to supercharge your team's productivity
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuresList.map(({ icon, title, description }, i) => (
+              <motion.div
+                key={title}
+                className="p-8 rounded-xl bg-gradient-to-r from-purple-700/60 to-blue-700/60 shadow-lg scroll-reveal"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+              >
+                <div className="flex items-center mb-4 text-purple-300">{icon}</div>
+                <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+                <p className="text-gray-300">{description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 bg-gradient-to-r from-purple-900 to-blue-900 relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 scroll-reveal">
+            <h2 className="text-5xl font-bold mb-6 gradient-text">Choose Your Plan</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Flexible pricing to suit every team and project size
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-10">
+            {pricingPlans.map(({ name, price, period, description, features, popular }) => (
+              <motion.div
+                key={name}
+                className={`p-8 rounded-2xl shadow-xl bg-gradient-to-br from-purple-800 to-blue-800 relative ${
+                  popular ? 'border-4 border-purple-500' : 'border border-transparent'
+                } scroll-reveal`}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                {popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-600 px-4 py-1 rounded-full text-white text-sm font-semibold">
+                    Most Popular
+                  </div>
+                )}
+
+                <h3 className="text-3xl font-bold mb-2">{name}</h3>
+                <p className="text-gray-300 mb-6">{description}</p>
+                <div className="mb-8">
+                  <span className="text-5xl font-extrabold">{price}</span>
+                  <span className="text-xl text-gray-400">{period}</span>
+                </div>
+
+                <ul className="mb-8 space-y-3">
+                  {features.map(feature => (
+                    <li key={feature} className="flex items-center text-gray-300">
+                      <Check className="mr-2 h-5 w-5 text-green-400" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <Button 
+                  className="w-full"
+                  onClick={handleFeatureNotImplemented}
+                >
+                  Get Started
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 scroll-reveal">
+            <h2 className="text-5xl font-bold mb-6 gradient-text">What Our Users Say</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Real feedback from teams who leveled up with GameFlow
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-10">
+            {testimonials.map(({ name, role, content, rating, avatar }) => (
+              <motion.div
+                key={name}
+                className="p-8 rounded-xl bg-gradient-to-r from-purple-700/40 to-blue-700/40 shadow-lg scroll-reveal"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="flex items-center mb-6">
+                  <img src={avatar} alt={name} className="w-14 h-14 rounded-full mr-4" />
+                  <div>
+                    <p className="font-bold text-lg">{name}</p>
+                    <p className="text-sm text-purple-300">{role}</p>
+                  </div>
+                </div>
+                <p className="mb-6 text-gray-300 italic">"{content}"</p>
+                <div className="flex">
+                  {[...Array(rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-400" />
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-purple-900 py-12 mt-24 text-center text-gray-400">
+        <p>© 2025 GameFlow. All rights reserved.</p>
+        <div className="flex justify-center mt-4 space-x-6">
+          {[{ Icon: Github, url: "https://github.com" }, { Icon: Twitter, url: "https://twitter.com" }, { Icon: Linkedin, url: "https://linkedin.com" }].map(({ Icon, url }) => (
+            <a key={url} href={url} target="_blank" rel="noopener noreferrer" aria-label={Icon.name} className="hover:text-white">
+              <Icon className="h-6 w-6" />
+            </a>
+          ))}
+        </div>
+      </footer>
     </div>
   );
 };
